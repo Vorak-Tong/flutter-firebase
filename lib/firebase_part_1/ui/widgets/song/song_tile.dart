@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase/model/songs/song_with_artist.dart';
+import 'package:flutter_firebase/firebase_part_1/model/songs/song_with_artist.dart';
 
 // import '../../../model/songs/song.dart';
 

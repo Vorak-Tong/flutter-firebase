@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase/data/repositories/artists/artist_repository.dart';
-import 'package:flutter_firebase/model/artists/artist.dart';
-import 'package:flutter_firebase/model/songs/song_with_artist.dart';
+import 'package:flutter_firebase/firebase_part_1/data/repositories/artists/artist_repository.dart';
+import 'package:flutter_firebase/firebase_part_1/model/artists/artist.dart';
+import 'package:flutter_firebase/firebase_part_1/model/songs/song_with_artist.dart';
 import '../../../../data/repositories/songs/song_repository.dart';
 import '../../../states/player_state.dart';
 import '../../../../model/songs/song.dart';

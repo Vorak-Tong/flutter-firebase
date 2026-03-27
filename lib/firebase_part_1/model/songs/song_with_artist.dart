@@ -1,5 +1,5 @@
 import '../artists/artist.dart';
-import '../songs/song.dart';
+import 'song.dart';
 
 class SongWithArtist {
   final Song song;
