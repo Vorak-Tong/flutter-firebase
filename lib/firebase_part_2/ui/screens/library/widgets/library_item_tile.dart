@@ -7,11 +7,13 @@ class LibraryItemTile extends StatelessWidget {
     required this.data,
     required this.isPlaying,
     required this.onTap,
+    required this.onLike,
   });
 
   final LibraryItemData data;
   final bool isPlaying;
   final VoidCallback onTap;
+  final VoidCallback onLike;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +31,8 @@ class LibraryItemTile extends StatelessWidget {
             children: [
               Text("${data.song.duration.inMinutes} mins"),
               SizedBox(width: 20),
+              Text('${data.song.likes} likes'),
+              SizedBox(width: 20),
               Text(data.artist.name),
               SizedBox(width: 20),
               Text(data.artist.genre),
@@ -37,9 +41,13 @@ class LibraryItemTile extends StatelessWidget {
           leading: CircleAvatar(
             backgroundImage: NetworkImage(data.song.imageUrl.toString()),
           ),
-          trailing: Text(
-            isPlaying ? "Playing" : "",
-            style: TextStyle(color: Colors.amber),
+          // trailing: Text(
+          //   isPlaying ? "Playing" : "",
+          //   style: TextStyle(color: Colors.amber),
+          // ),
+          trailing: IconButton(
+            onPressed: onLike,
+            icon: const Icon(Icons.favorite, color: Colors.lightBlue),
           ),
         ),
       ),
