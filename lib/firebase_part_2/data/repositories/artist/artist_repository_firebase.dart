@@ -9,9 +9,14 @@ import 'artist_repository.dart';
 
 class ArtistRepositoryFirebase implements ArtistRepository {
   final Uri artistsUri = FirebaseConfig.baseUrl.replace(path: '/artists.json');
+  List<Artist>? _cachedArtists;
 
   @override
-  Future<List<Artist>> fetchArtists() async {
+  Future<List<Artist>> fetchArtists({bool forceFetch = false}) async {
+    if (!forceFetch && _cachedArtists != null) {
+      return _cachedArtists!;
+    }
+
     final http.Response response = await http.get(artistsUri);
 
     if (response.statusCode == 200) {
@@ -22,6 +27,8 @@ class ArtistRepositoryFirebase implements ArtistRepository {
       for (final entry in songJson.entries) {
         result.add(ArtistDto.fromJson(entry.key, entry.value));
       }
+
+      _cachedArtists = result;
       return result;
     } else {
       // 2- Throw expcetion if any issue
@@ -30,5 +37,12 @@ class ArtistRepositoryFirebase implements ArtistRepository {
   }
 
   @override
-  Future<Artist?> fetchArtistById(String id) async {}
+  Future<Artist?> fetchArtistById(String id) async {
+    final List<Artist> artists = await fetchArtists();
+    try {
+      return artists.firstWhere((artist) => artist.id == id);
+    } catch (e) {
+      throw Exception("Failed to load artists");
+    }
+  }
 }
